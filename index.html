@@ -73,17 +73,22 @@
   }
   .hero-photo {
     flex-shrink: 0;
-    width: 120px; height: 120px; border-radius: 50%;
-    border: 3px solid rgba(46,196,160,0.4);
+    width: 130px; height: 130px; border-radius: 50%;
+    border: 3px dashed rgba(46,196,160,0.55);
     overflow: hidden;
     background: var(--navy-mid);
     display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 4px;
+    flex-direction: column; gap: 6px;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s;
   }
+  .hero-photo:hover { border-color: rgba(46,196,160,0.9); }
   .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .photo-placeholder { text-align: center; }
-  .photo-placeholder .initials { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--teal); }
-  .photo-placeholder .hint { font-size: 0.6rem; color: rgba(255,255,255,0.35); line-height: 1.4; }
+  .photo-placeholder { text-align: center; padding: 0.5rem; }
+  .photo-placeholder .initials { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--teal); }
+  .photo-placeholder .hint { font-size: 0.58rem; color: rgba(255,255,255,0.4); line-height: 1.5; margin-top: 2px; }
+  .photo-placeholder .cam-icon { color: rgba(46,196,160,0.6); margin-bottom: 2px; }
   .hero-text { flex: 1; }
   .hero-badge {
     display: inline-block; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
@@ -137,6 +142,7 @@
     border-radius: var(--radius); overflow: hidden; transition: all 0.25s;
   }
   .dash-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(46,196,160,0.3); }
+  a:has(.dash-card):hover .dash-card { background: rgba(255,255,255,0.1); border-color: rgba(46,196,160,0.6) !important; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
   .dash-preview {
     height: 130px; padding: 1.25rem;
     display: flex; align-items: flex-end; gap: 6px;
@@ -145,7 +151,7 @@
     position: relative; overflow: hidden;
   }
   .dash-preview::after {
-    content: 'LIVE PREVIEW'; font-size: 0.55rem; letter-spacing: 0.12em;
+    content: '...'; font-size: 0.55rem; letter-spacing: 0.12em;
     position: absolute; top: 10px; right: 10px;
     color: rgba(46,196,160,0.5); font-weight: 500;
   }
@@ -343,14 +349,10 @@
 <section class="hero" id="about">
   <div class="hero-inner">
     <div class="hero-photo">
-      <!-- REPLACE: swap the div below with <img src="your-photo.jpg" alt="Yi Htet Aung"> -->
-      <div class="photo-placeholder">
-        <div class="initials">YA</div>
-        <div class="hint">Add your<br>photo here</div>
-      </div>
+      <img src="assets/myimg.jpg" alt="Yi Htet Aung">
     </div>
     <div class="hero-text">
-      <span class="hero-badge">Open to work · Dubai, UAE</span>
+      <span class="hero-badge">Open to work</span>
       <h1 class="hero-name">Yi Htet Aung</h1>
       <p class="hero-role">Finance Operations &nbsp;·&nbsp; Business Operations &nbsp;·&nbsp; Operations Analyst</p>
       <div class="hero-contacts">
@@ -359,9 +361,8 @@
         <a href="https://www.linkedin.com/in/yi-htet-aung-89518b1b5/" target="_blank" class="contact-pill">LinkedIn ↗</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><div class="stat-val">6+</div><div class="stat-lbl">Years experience</div></div>
-        <div class="stat"><div class="stat-val">90%</div><div class="stat-lbl">Claims resolved</div></div>
-        <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">Industries</div></div>
+        <div class="stat"><div class="stat-val" style="font-size:1.2rem;line-height:1.4;letter-spacing:0.01em;">6+</div><div class="stat-lbl" style="margin-top:4px;">Years experience</div></div>
+        <div class="stat"><div class="stat-val" style="font-size:1rem;line-height:1.65;letter-spacing:0.01em;">E-commerce, Insurance, Property Rental</div><div class="stat-lbl" style="margin-top:4px;">Industries</div></div>
       </div>
     </div>
   </div>
@@ -377,8 +378,8 @@
         <div class="bring-icon" style="background:#E6F1FB;">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2.5" stroke="#185FA5" stroke-width="1.4"/><path d="M6 10h8M6 13h5" stroke="#185FA5" stroke-width="1.4" stroke-linecap="round"/></svg>
         </div>
-        <h3>Payment expertise</h3>
-        <p>End-to-end operations across 5 channels — online, POS, bank transfer, cash, and cryptocurrency — with full PMS reconciliation and 90%+ claim resolution.</p>
+        <h3>FinOps / Payment Expertise</h3>
+        <p>End-to-end financial operations across multiple payment channels, including payment and refund processing, payment reconciliation, MIS reporting, budget allocation and reporting, expense tracking, and performance management. Managed property rental claims and office expense claims, ensuring accurate reimbursement handling through external platforms and internal finance coordination.</p>
       </div>
       <div class="bring-card">
         <div class="bring-icon" style="background:#E1F5EE;">
@@ -402,8 +403,62 @@
 <section class="dash-section" id="dashboards">
   <div class="section-inner">
     <p class="section-label">Dashboards</p>
-    <h2 class="section-title">Live reporting work</h2>
-    <div class="dash-grid">
+    <h2 class="section-title">Reporting & Analytics Work</h2>
+
+    <!-- LIVE DASHBOARDS -->
+    <div style="margin-bottom:2.5rem;">
+      <p style="font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);margin-bottom:0.4rem;">Personal Dashboards — Click to Explore</p>
+      <div class="dash-grid">
+
+        <a href="https://datastudio.google.com/u/1/reporting/6c2a57ce-337d-4ab7-a05f-bb2e45432943/page/wyIqF" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="dash-card" style="border:1.5px solid rgba(46,196,160,0.35);transition:all 0.25s;cursor:pointer;">
+            <div class="dash-preview" style="background:linear-gradient(135deg,rgba(46,196,160,0.12) 0%,rgba(24,95,165,0.1) 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="4" y="4" width="28" height="28" rx="4" stroke="rgba(46,196,160,0.7)" stroke-width="1.5"/><path d="M10 22l4-5 4 3 4-7 4 4" stroke="#2ec4a0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="28" cy="17" r="2" fill="#2ec4a0"/></svg>
+              <span style="font-size:0.68rem;letter-spacing:0.1em;color:var(--teal);text-transform:uppercase;font-weight:500;">Click to open ↗</span>
+            </div>
+            <div class="dash-body">
+              <div class="dash-name">SaaS Metrics Dashboard</div>
+              <div class="dash-meta">Personal Project &nbsp;·&nbsp; Google Looker Studio</div>
+              <div class="dash-tags">
+                <span class="dash-tag">MRR / ARR</span>
+                <span class="dash-tag">Churn analysis</span>
+                <span class="dash-tag">Revenue ops</span>
+                <span class="dash-tag">LTV segmentation</span>
+              </div>
+              <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:8px;">A centralised, real-time reporting tool tracking core SaaS health indicators — MRR/ARR, customer churn, deferred revenue, and LTV by acquisition channel. Built on an automated Google Sheets pipeline with data blending and calculated fields in Looker Studio, replacing manual spreadsheet reporting and enabling leadership to make faster, data-informed decisions.</p>
+              <span class="dash-link">Open dashboard &nbsp;→</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://datastudio.google.com/u/1/reporting/6c3062e6-f4c4-4562-93a4-cde4f7495551/page/4ioiF" target="_blank" rel="noopener" style="text-decoration:none;">
+          <div class="dash-card" style="border:1.5px solid rgba(46,196,160,0.35);transition:all 0.25s;cursor:pointer;">
+            <div class="dash-preview" style="background:linear-gradient(135deg,rgba(46,196,160,0.12) 0%,rgba(24,95,165,0.1) 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="4" y="4" width="28" height="28" rx="4" stroke="rgba(46,196,160,0.7)" stroke-width="1.5"/><rect x="9" y="20" width="5" height="8" rx="1" fill="rgba(46,196,160,0.4)"/><rect x="16" y="14" width="5" height="14" rx="1" fill="rgba(46,196,160,0.6)"/><rect x="23" y="9" width="5" height="19" rx="1" fill="#2ec4a0"/></svg>
+              <span style="font-size:0.68rem;letter-spacing:0.1em;color:var(--teal);text-transform:uppercase;font-weight:500;">Click to open ↗</span>
+            </div>
+            <div class="dash-body">
+              <div class="dash-name">Dubai Rental Property Analysis</div>
+              <div class="dash-meta">Personal Project &nbsp;·&nbsp; Google Looker Studio</div>
+              <div class="dash-tags">
+                <span class="dash-tag">Rent vs. size trends</span>
+                <span class="dash-tag">Inventory analysis</span>
+                <span class="dash-tag">Market supply</span>
+                <span class="dash-tag">Property types</span>
+              </div>
+              <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:8px;">A market analysis dashboard covering Dubai's rental landscape — visualising rent-per-sq-ft pricing patterns, inventory distribution by bedroom count, and listing trends over time by emirate and property type. Built to support data-driven decisions for investors, landlords, and analysts.</p>
+              <span class="dash-link">Open dashboard &nbsp;→</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- PREVIOUS WORK DASHBOARDS -->
+    <div>
+      <p style="font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem;">Previous Works</p>
+      <div class="dash-grid">
 
       <div class="dash-card">
         <div class="dash-preview">
@@ -419,13 +474,9 @@
           <div class="bar" style="height:35px;background:#185FA5;opacity:0.55;"></div>
           <div class="bar" style="height:90px;background:#185FA5;opacity:1;"></div>
           <div class="bar" style="height:60px;background:#185FA5;opacity:0.75;"></div>
-          <div style="margin-left:auto;display:flex;flex-direction:column;gap:5px">
-            <div style="font-size:1.1rem;font-weight:500;color:var(--teal);font-family:'DM Serif Display',serif;">90%+</div>
-            <div style="font-size:0.6rem;color:rgba(255,255,255,0.4);line-height:1.3;">claim<br>resolution</div>
-          </div>
         </div>
         <div class="dash-body">
-          <div class="dash-name">Payment KPI dashboard</div>
+          <div class="dash-name">Payment KPI Dashboard</div>
           <div class="dash-meta">Deluxe Holiday Homes &nbsp;·&nbsp; Google Looker Studio</div>
           <div class="dash-tags">
             <span class="dash-tag">Collection rate</span>
@@ -433,7 +484,6 @@
             <span class="dash-tag">Claim performance</span>
             <span class="dash-tag">Multi-channel volume</span>
           </div>
-          <a href="#" class="dash-link">View dashboard &nbsp;→</a>
         </div>
       </div>
 
@@ -459,17 +509,17 @@
           </div>
         </div>
         <div class="dash-body">
-          <div class="dash-name">Finance ops reporting dashboard</div>
+          <div class="dash-name">Finance Ops Reporting Dashboard</div>
           <div class="dash-meta">KBZPay Market &nbsp;·&nbsp; Google Looker Studio</div>
           <div class="dash-tags">
             <span class="dash-tag">3PL reconciliation</span>
             <span class="dash-tag">Expense processing</span>
             <span class="dash-tag">Monthly performance</span>
           </div>
-          <a href="#" class="dash-link">View dashboard &nbsp;→</a>
         </div>
       </div>
 
+    </div>
     </div>
   </div>
 </section>
@@ -490,9 +540,9 @@
         <div class="proj-skills">
           <span class="skill-chip">Process design</span>
           <span class="skill-chip">UAT</span>
-          <span class="skill-chip">Stakeholder mgmt</span>
+          <span class="skill-chip">Stakeholder management</span>
         </div>
-        <div class="proj-role">Role: Ops Coordinator &nbsp;·&nbsp; KBZPay Market</div>
+        <div class="proj-role">Role: Project Associate &nbsp;·&nbsp; KBZPay Market</div>
       </div>
 
       <div class="proj-card type-fin">
@@ -500,7 +550,7 @@
           <div class="proj-name">COD project</div>
           <span class="proj-badge badge-fin">Finance</span>
         </div>
-        <p class="proj-desc">Cash-on-delivery operations project — managed payment tracking, reconciliation workflows, and cross-team coordination to ensure accurate settlement and financial reporting.</p>
+        <p class="proj-desc">Cash-on-delivery (COD) payment enablement — identified key payment touchpoints, proposed and validated the Escrow wallet budget required for COD disbursement, collaborated with cross-functional teams to confirm accurate reporting features and settlement processes, and contributed to the design of end-to-end payment and refund workflows for COD operations.</p>
         <div class="proj-skills">
           <span class="skill-chip">Payment reconciliation</span>
           <span class="skill-chip">Reporting</span>
@@ -511,7 +561,7 @@
 
       <div class="proj-card type-prod">
         <div class="proj-top">
-          <div class="proj-name">Premium calculator app & web</div>
+          <div class="proj-name">Premium calculator (Mobile App & Web)</div>
           <span class="proj-badge badge-prod">Product</span>
         </div>
         <p class="proj-desc">Supported development and launch of an insurance premium calculator — contributed to UAT cycles, SOP creation, user documentation, and full operational readiness sign-off before go-live.</p>
@@ -532,7 +582,7 @@
         <p class="proj-desc">Contributed to the company website redesign — coordinated content accuracy reviews, verified operational information across departments, and supported multi-stakeholder sign-off.</p>
         <div class="proj-skills">
           <span class="skill-chip">Content ops</span>
-          <span class="skill-chip">Stakeholder coord</span>
+          <span class="skill-chip">Stakeholder coordination</span>
           <span class="skill-chip">Quality review</span>
         </div>
         <div class="proj-role">Role: Ops Contributor &nbsp;·&nbsp; AYA SOMPO Insurance</div>
@@ -570,8 +620,25 @@
         <div class="exp-dot" style="color:#0F6E56;border-color:#9FE1CB;background:#E1F5EE;">KBZ</div>
         <div class="exp-content">
           <div class="exp-header">
+            <div class="exp-role">Project Associate</div>
+            <div class="exp-date">Feb 2024 – Apr 2024</div>
+          </div>
+          <div class="exp-company">KBZPay Market (E-commerce) &nbsp;·&nbsp; Myanmar</div>
+          <ul class="exp-bullets">
+            <li>Coordinated tasks and deliverables across product owners and stakeholders to keep project milestones on track</li>
+            <li>Tracked cross-functional task progress, facilitated team communication, and maintained alignment with project timelines</li>
+            <li>Organised project meetings, captured minutes, and followed up on action items to sustain team accountability</li>
+            <li>Conducted market research to validate product concepts and support launch readiness planning</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot" style="color:#0F6E56;border-color:#9FE1CB;background:#E1F5EE;">KBZ</div>
+        <div class="exp-content">
+          <div class="exp-header">
             <div class="exp-role">Finance Operations Supervisor</div>
-            <div class="exp-date">Aug 2022 – Apr 2024</div>
+            <div class="exp-date">Aug 2022 – Jan 2024</div>
           </div>
           <div class="exp-company">KBZPay Market (E-commerce) &nbsp;·&nbsp; Myanmar</div>
           <ul class="exp-bullets">
@@ -625,8 +692,9 @@
         <div class="skill-row"><span class="skill-name-text">Advanced Excel & Google Sheets</span><div class="skill-dots"><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div></div></div>
         <div class="skill-row"><span class="skill-name-text">SAP Ariba</span><div class="skill-dots"><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div></div></div>
         <div class="skill-row"><span class="skill-name-text">BigQuery (SQL)</span><div class="skill-dots"><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div><div class="dot dot-empty"></div></div></div>
-        <div class="skill-row"><span class="skill-name-text">Oracle (OIPA)</span><div class="skill-dots"><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div><div class="dot dot-empty"></div></div></div>
+        <div class="skill-row"><span class="skill-name-text">Power BI (basic)</span><div class="skill-dots"><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div><div class="dot dot-empty"></div><div class="dot dot-empty"></div></div></div>
         <div class="skill-row"><span class="skill-name-text">Asana · ClickUp · Airtable</span><div class="skill-dots"><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div></div></div>
+        <div class="skill-row"><span class="skill-name-text">Oracle (OIPA)</span><div class="skill-dots"><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div><div class="dot dot-empty"></div><div class="dot dot-empty"></div></div></div>
       </div>
     </div>
   </div>
@@ -638,34 +706,48 @@
     <p class="section-label">Certifications</p>
     <h2 class="section-title">Continuous learning</h2>
     <div class="certs-grid">
-      <div class="cert-card">
-        <div class="cert-issuer-dot" style="background:#E6F1FB;color:#0C447C;">G</div>
-        <div><div class="cert-name">Google Project Management Certificate</div><div class="cert-issuer-name">Google</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-issuer-dot" style="background:#E6F1FB;color:#0C447C;">AI</div>
-        <div><div class="cert-name">Google AI Professional Certificate</div><div class="cert-issuer-name">Google</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-issuer-dot" style="background:#EAF3DE;color:#27500A;">MS</div>
-        <div><div class="cert-name">Microsoft Excel Professional Certificate</div><div class="cert-issuer-name">Microsoft</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-issuer-dot" style="background:#FAEEDA;color:#633806;">HS</div>
-        <div><div class="cert-name">Revenue Operations</div><div class="cert-issuer-name">HubSpot</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-issuer-dot" style="background:#EEEDFE;color:#3C3489;">As</div>
-        <div><div class="cert-name">Workflow Specialist Certificate</div><div class="cert-issuer-name">Asana</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-issuer-dot" style="background:#FAECE7;color:#712B13;">CU</div>
-        <div><div class="cert-name">Build Your First Workflow</div><div class="cert-issuer-name">ClickUp</div></div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-issuer-dot" style="background:#F1EFE8;color:#444441;">Al</div>
-        <div><div class="cert-name">Diploma in Business Administration</div><div class="cert-issuer-name">Alison</div></div>
-      </div>
+      <a href="https://coursera.org/share/152ef7036c9c4b66d08c3ad3f26f69fe" style="text-decoration: none; color: inherit; display: block;">
+        <div class="cert-card">
+          <div class="cert-issuer-dot" style="background:#E6F1FB;color:#0C447C;">G</div>
+          <div><div class="cert-name">Google Project Management Certificate</div><div class="cert-issuer-name">Google</div></div>
+        </div>
+      </a>
+      <a href="https://coursera.org/share/fc1e19e1e1e21311704dd7430899b15d" style="text-decoration: none; color: inherit; display: block;">
+        <div class="cert-card">
+          <div class="cert-issuer-dot" style="background:#E6F1FB;color:#0C447C;">AI</div>
+          <div><div class="cert-name">Google AI Professional Certificate</div><div class="cert-issuer-name">Google</div></div>
+        </div>
+      </a>
+      <a href="https://coursera.org/share/cf535684ff8c144e1fdf472a255e291d" style="text-decoration: none; color: inherit; display: block;">
+        <div class="cert-card">
+          <div class="cert-issuer-dot" style="background:#EAF3DE;color:#27500A;">MS</div>
+          <div><div class="cert-name">Microsoft Excel Professional Certificate</div><div class="cert-issuer-name">Microsoft</div></div>
+        </div>
+      </a>
+      <a href="https://app-eu1.hubspot.com/academy/achievements/yhrc1rft/en/1/yi-htet-aung/revenue-operations" style="text-decoration: none; color: inherit; display: block;">
+        <div class="cert-card">
+          <div class="cert-issuer-dot" style="background:#FAEEDA;color:#633806;">HS</div>
+          <div><div class="cert-name">Revenue Operations</div><div class="cert-issuer-name">HubSpot</div></div>
+        </div>
+      </a>
+      <a href="https://certifications.asana.com/e12af8fa-7bc1-43b1-a9c9-e34b5e5c21fb#acc.MqT4Ld5k" style="text-decoration: none; color: inherit; display: block;">
+        <div class="cert-card">
+          <div class="cert-issuer-dot" style="background:#EEEDFE;color:#3C3489;">As</div>
+          <div><div class="cert-name">Workflow Specialist Certificate</div><div class="cert-issuer-name">Asana</div></div>
+        </div>
+      </a>
+      <a href="https://verify.skilljar.com/c/v2nm7ro9rdq5" style="text-decoration: none; color: inherit; display: block;">
+        <div class="cert-card">
+          <div class="cert-issuer-dot" style="background:#FAECE7;color:#712B13;">CU</div>
+          <div><div class="cert-name">Building Workflow</div><div class="cert-issuer-name">ClickUp</div></div>
+        </div>
+      </a>
+      <a href="https://alison.com/certification/check/2y10FFHO4PV17Vf4IpHeTEqhie7iqKLtRe2k9afBwMiqxFwRchg95S72" style="text-decoration: none; color: inherit; display: block;">
+        <div class="cert-card">
+          <div class="cert-issuer-dot" style="background:#F1EFE8;color:#444441;">Al</div>
+          <div><div class="cert-name">Diploma in Business Administration</div><div class="cert-issuer-name">Alison</div></div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -693,7 +775,7 @@
   <div class="section-inner">
     <p class="section-label" style="color:rgba(46,196,160,0.8);">Get in touch</p>
     <h2 class="section-title">Open to new opportunities</h2>
-    <p>I'm available for Finance Operations, Business Operations, Operations Analyst, and hybrid data analysis roles in Dubai and remotely. Feel free to reach out directly.</p>
+    <p>I'm available for Finance Operations, Payment Operations, Operations Analyst, and hybrid data analysis roles — open to both onsite and remote positions. Feel free to reach out directly.</p>
     <div class="contact-buttons">
       <a href="mailto:yihtet.awng@gmail.com" class="btn-primary">Send an email</a>
       <a href="https://www.linkedin.com/in/yi-htet-aung-89518b1b5/" target="_blank" class="btn-outline">View LinkedIn ↗</a>
